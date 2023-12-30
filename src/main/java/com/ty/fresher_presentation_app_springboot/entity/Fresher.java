@@ -2,6 +2,9 @@ package com.ty.fresher_presentation_app_springboot.entity;
 
 import java.util.List;
 
+import com.ty.fresher_presentation_app_springboot.util.Role;
+
+import ch.qos.logback.core.status.Status;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,61 +21,77 @@ public class Fresher {
 	private String email;
 	private long phone;
 	private String password;
-	private String role;
-	private String status;
+	private Role role;
+	private Status status;
 	
 	@OneToMany
 	private List<Presentation> presentation;
-	
-	
-	public List<Presentation> getPresentation() {
-		return presentation;
-	}
-	public void setPresentation(List<Presentation> presentation) {
-		this.presentation = presentation;
-	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public long getPhone() {
 		return phone;
 	}
+
 	public void setPhone(long phone) {
 		this.phone = phone;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRole() {
+
+	public Role getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+
+	public void setRole(Role role) {
 		this.role = role;
 	}
-	public String getStatus() {
+
+	public Status getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+
+	public void setStatus(Status status) {
 		this.status = status;
 	}
+
+	public List<Presentation> getPresentation() {
+		return presentation;
+	}
+
+	public void setPresentation(List<Presentation> presentation) {
+		this.presentation = presentation;
+	}
+	
+	
 	
 	
 	

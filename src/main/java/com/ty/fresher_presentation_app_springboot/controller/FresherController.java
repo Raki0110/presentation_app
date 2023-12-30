@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ty.fresher_presentation_app_springboot.dto.ResponseStucture;
 import com.ty.fresher_presentation_app_springboot.entity.Fresher;
 import com.ty.fresher_presentation_app_springboot.service.FresherService;
+import com.ty.fresher_presentation_app_springboot.util.Role;
 
 @RestController
 public class FresherController {
@@ -19,6 +20,7 @@ public class FresherController {
 	@PostMapping("/savefresher")
 	public ResponseEntity<ResponseStucture<Fresher>> saveFresher(@RequestBody Fresher fresher)
 	{
+		fresher.setRole(Role.TRAINER);
 		return fresherService.saveFresher(fresher);
 	}
 }
