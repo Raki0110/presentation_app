@@ -14,7 +14,8 @@
 	import com.ty.fresher_presentation_app_springboot.entity.Fresher;
 	import com.ty.fresher_presentation_app_springboot.entity.Presentation;
 	import com.ty.fresher_presentation_app_springboot.repository.FresherRepository;
-	import com.ty.fresher_presentation_app_springboot.util.Status;
+import com.ty.fresher_presentation_app_springboot.repository.PresentationRepository;
+import com.ty.fresher_presentation_app_springboot.util.Status;
 	
 	@Service
 	public class PresentationService {
@@ -27,6 +28,9 @@
 		
 		@Autowired
 		private FresherRepository fresherRepository;
+		
+		@Autowired
+		private PresentationRepository presentationRepository;
 		
 		public ResponseEntity<ResponseStucture<Presentation>> savePresentation(Presentation presentation,int id)
 		{
@@ -57,6 +61,43 @@
 						responseStucture.setData(null);
 						return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.NOT_FOUND);
 					}
-			
+		}
+		
+		public ResponseEntity<ResponseStucture<Presentation>> updatePresentation(int id)
+		{
+			Optional<Presentation> presentation = presentationRepository.findById(id);
+			Presentation prstn =presentation.get();
+			if(presentation.isPresent()) {
+				if(prstn.getStatus()==Status.ASSIGNED) {
+					prstn.setStatus(Status.VOTINGPOLLON);
+					Presentation presentation1=presentationDao.savePresentation(prstn);
+					ResponseStucture<Presentation> responseStucture=new ResponseStucture<>();
+					responseStucture.setStatusCode(200);
+					responseStucture.setMessage("Voting Poll is ON");
+					responseStucture.setData(presentation1);
+					return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.OK);
+				}
+				else if(prstn.getStatus()==Status.VOTINGPOLLON){
+					prstn.setStatus(Status.COMPLETED);
+					Presentation presentation1=presentationDao.savePresentation(prstn);
+					ResponseStucture<Presentation> responseStucture=new ResponseStucture<>();
+					responseStucture.setStatusCode(200);
+					responseStucture.setMessage("Presentation Completed");
+					responseStucture.setData(presentation1);
+					return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.OK);
+				}
+				else
+				{
+					return null;
+				}
+	
+			}
+			else {
+				ResponseStucture<Presentation> responseStucture=new ResponseStucture<>();
+				responseStucture.setStatusCode(404);
+				responseStucture.setMessage("ID Not Found");
+				responseStucture.setData(null);
+				return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.NOT_FOUND);
+			}
 		}
 	}
