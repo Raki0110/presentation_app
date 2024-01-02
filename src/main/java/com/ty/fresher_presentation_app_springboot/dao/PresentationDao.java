@@ -17,7 +17,4 @@ public class PresentationDao {
 		return presentationRepository.save(presentation);
 	}
 	
-	public Presentation findById(int id) {
-		return null;
-	}
 }
