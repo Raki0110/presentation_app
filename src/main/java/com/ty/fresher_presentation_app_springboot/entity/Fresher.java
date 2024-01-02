@@ -3,8 +3,8 @@ package com.ty.fresher_presentation_app_springboot.entity;
 import java.util.List;
 
 import com.ty.fresher_presentation_app_springboot.util.Role;
+import com.ty.fresher_presentation_app_springboot.util.Status;
 
-import ch.qos.logback.core.status.Status;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
