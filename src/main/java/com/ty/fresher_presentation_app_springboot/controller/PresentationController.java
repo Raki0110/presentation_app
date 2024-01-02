@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,5 +24,11 @@ public class PresentationController {
 		return presentationService.savePresentation(presentation, id);
 	}
 	
+	@PutMapping("/updatepresentation/{id}")
+	
+	public ResponseEntity<ResponseStucture<Presentation>> savePresentation(@PathVariable int id)
+	{
+		return presentationService.updatePresentation(id);
+	}
 
 }
