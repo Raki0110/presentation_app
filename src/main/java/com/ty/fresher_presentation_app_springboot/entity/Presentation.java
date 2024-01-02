@@ -20,7 +20,7 @@ public class Presentation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String toipc;
+	private String topic;
 	private String subject;
 	private Status status;
 	private double totalScore;
@@ -52,11 +52,13 @@ public class Presentation {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getToipc() {
-		return toipc;
+	
+	
+	public String getTopic() {
+		return topic;
 	}
-	public void setToipc(String toipc) {
-		this.toipc = toipc;
+	public void setTopic(String topic) {
+		this.topic = topic;
 	}
 	public String getSubject() {
 		return subject;

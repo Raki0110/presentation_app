@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.ty.fresher_presentation_app_springboot.entity.Fresher;
 import com.ty.fresher_presentation_app_springboot.repository.FresherRepository;
 import com.ty.fresher_presentation_app_springboot.util.Role;
+import com.ty.fresher_presentation_app_springboot.util.Status;
 
 @Repository
 public class FresherDao {
@@ -24,6 +25,7 @@ public class FresherDao {
 		Fresher fresher=new Fresher();
 		fresher.setRole(Role.TRAINER);
 		fresher.setName("ram");
+		fresher.setStatus(Status.ACTIVE);
 		fresher.setEmail("ram@gmail.com");
 		fresher.setPassword("Ram@123");
 		fresher.setPhone(7894562123l);

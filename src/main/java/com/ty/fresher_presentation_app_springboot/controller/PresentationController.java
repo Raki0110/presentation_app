@@ -14,10 +14,10 @@ import com.ty.fresher_presentation_app_springboot.service.PresentationService;
 @RestController
 public class PresentationController {
 	
-	@Autowired
+	@Autowired(required = true)
 	private PresentationService presentationService; 
 	
-	@PostMapping("/savepresentation")
+	@PostMapping("/savepresentation/{id}")
 	public ResponseEntity<ResponseStucture<Presentation>> savePresentation(@RequestBody Presentation presentation,@PathVariable int id)
 	{
 		return presentationService.savePresentation(presentation, id);
