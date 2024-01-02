@@ -16,6 +16,8 @@ import com.ty.fresher_presentation_app_springboot.repository.FresherRepository;
 import com.ty.fresher_presentation_app_springboot.util.Role;
 import com.ty.fresher_presentation_app_springboot.util.Status;
 
+import fresher_presentation_app_springboot.exceptions.StudentIdNotFoundException;
+
 @Service
 public class FresherService {
 
@@ -96,12 +98,14 @@ public class FresherService {
 		
 		else
 		{
-			ResponseStucture<Fresher> responseStucture=new ResponseStucture<>();
-			responseStucture.setStatusCode(404);
-			responseStucture.setMessage("Student with given ID Not Found");
-			responseStucture.setData(null);
+			throw new StudentIdNotFoundException("ID: "+id+" ,not present in DB");
 			
-			return new ResponseEntity<ResponseStucture<Fresher>>(responseStucture,HttpStatus.BAD_REQUEST);
+//			ResponseStucture<Fresher> responseStucture=new ResponseStucture<>();
+//			responseStucture.setStatusCode(404);
+//			responseStucture.setMessage("Student with given ID Not Found");
+//			responseStucture.setData(null);
+//			
+//			return new ResponseEntity<ResponseStucture<Fresher>>(responseStucture,HttpStatus.BAD_REQUEST);
 		}
 	}
 	
