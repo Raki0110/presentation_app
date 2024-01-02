@@ -5,6 +5,7 @@ public class ResponseStucture<T> {
 	private int statusCode;
 	private String message;
 	private T data;
+	
 	public int getStatusCode() {
 		return statusCode;
 	}
