@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.ty.fresher_presentation_app_springboot.util.Status;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +22,7 @@ public class Presentation {
 	private int id;
 	private String toipc;
 	private String subject;
-	private String status;
+	private Status status;
 	private double totalScore;
 	@CreationTimestamp
 	private LocalDateTime creationDateAndTime;
@@ -62,10 +64,11 @@ public class Presentation {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public String getStatus() {
+	
+	public Status getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 	public double getTotalScore() {
