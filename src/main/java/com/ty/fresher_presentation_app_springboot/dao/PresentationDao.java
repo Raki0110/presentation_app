@@ -1,5 +1,7 @@
 package com.ty.fresher_presentation_app_springboot.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +19,8 @@ public class PresentationDao {
 		return presentationRepository.save(presentation);
 	}
 	
+	public List<Presentation> findByUserId(int id)
+	{
+		return presentationRepository.findByUserId(id);
+	}
 }
