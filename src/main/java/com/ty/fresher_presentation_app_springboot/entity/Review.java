@@ -12,13 +12,13 @@ public class Review {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String confidence;
-	private String communication;
-	private String interaction;
-	private String eyeContact;
-	private String content;
-	private String liveliness;
-	private String energy;
+	private int confidence;
+	private int communication;
+	private int interaction;
+	private int eyeContact;
+	private int content;
+	private int liveliness;
+	private int energy;
 	
 	@OneToOne
 	private Fresher voter;
@@ -31,59 +31,59 @@ public class Review {
 		this.id = id;
 	}
 
-	public String getConfidence() {
+	public int getConfidence() {
 		return confidence;
 	}
 
-	public void setConfidence(String confidence) {
+	public void setConfidence(int confidence) {
 		this.confidence = confidence;
 	}
 
-	public String getCommunication() {
+	public int getCommunication() {
 		return communication;
 	}
 
-	public void setCommunication(String communication) {
+	public void setCommunication(int communication) {
 		this.communication = communication;
 	}
 
-	public String getInteraction() {
+	public int getInteraction() {
 		return interaction;
 	}
 
-	public void setInteraction(String interaction) {
+	public void setInteraction(int interaction) {
 		this.interaction = interaction;
 	}
 
-	public String getEyeContact() {
+	public int getEyeContact() {
 		return eyeContact;
 	}
 
-	public void setEyeContact(String eyeContact) {
+	public void setEyeContact(int eyeContact) {
 		this.eyeContact = eyeContact;
 	}
 
-	public String getContent() {
+	public int getContent() {
 		return content;
 	}
 
-	public void setContent(String content) {
+	public void setContent(int content) {
 		this.content = content;
 	}
 
-	public String getLiveliness() {
+	public int getLiveliness() {
 		return liveliness;
 	}
 
-	public void setLiveliness(String liveliness) {
+	public void setLiveliness(int liveliness) {
 		this.liveliness = liveliness;
 	}
 
-	public String getEnergy() {
+	public int getEnergy() {
 		return energy;
 	}
 
-	public void setEnergy(String energy) {
+	public void setEnergy(int energy) {
 		this.energy = energy;
 	}
 
