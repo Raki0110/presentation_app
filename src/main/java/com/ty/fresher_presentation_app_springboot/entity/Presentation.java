@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ty.fresher_presentation_app_springboot.util.Status;
 
 import jakarta.persistence.Entity;
@@ -28,9 +29,11 @@ public class Presentation {
 	private LocalDateTime creationDateAndTime;
 	private double totalTime;
 	
+	@JsonIgnore
 	@OneToMany
 	private List<Review> reviews;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Fresher presentator;
 	

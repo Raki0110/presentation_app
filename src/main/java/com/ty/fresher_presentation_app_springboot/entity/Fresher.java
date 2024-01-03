@@ -2,6 +2,7 @@ package com.ty.fresher_presentation_app_springboot.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ty.fresher_presentation_app_springboot.util.Role;
 import com.ty.fresher_presentation_app_springboot.util.Status;
 
@@ -24,6 +25,7 @@ public class Fresher {
 	private Role role;
 	private Status status;
 	
+	@JsonIgnore
 	@OneToMany
 	private List<Presentation> presentation;
 
