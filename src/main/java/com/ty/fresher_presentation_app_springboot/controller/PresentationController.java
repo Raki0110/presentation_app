@@ -1,5 +1,7 @@
 package com.ty.fresher_presentation_app_springboot.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,23 @@ public class PresentationController {
 		return presentationService.updatePresentation(id);
 	}
 	
+
+	@GetMapping("/findpresentationbyid")
+	
+	public ResponseEntity<ResponseStucture<Presentation>> findPresentationById(@PathVariable int id)
+	{
+		return presentationService.findPresentationById(id);
+	}
+	
+@GetMapping("/findpresentationbyuserid")
+	
+	public ResponseEntity<ResponseStucture<List<Presentation>>> findPresentationByuserId(@PathVariable int id)
+	{
+		return presentationService.findByUserId(id);
+	}
+
+	
+
 	@GetMapping("/presentationscore/{id}")
 	public ResponseEntity<ResponseStucture<Presentation>> calculatePresentation(@PathVariable int id)
 	{

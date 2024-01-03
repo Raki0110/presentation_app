@@ -1,4 +1,5 @@
-package com.ty.fresher_presentation_app_springboot.entity;
+
+ package com.ty.fresher_presentation_app_springboot.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

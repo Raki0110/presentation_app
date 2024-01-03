@@ -17,6 +17,9 @@ import com.ty.fresher_presentation_app_springboot.entity.Review;
 import com.ty.fresher_presentation_app_springboot.repository.FresherRepository;
 import com.ty.fresher_presentation_app_springboot.repository.PresentationRepository;
 import com.ty.fresher_presentation_app_springboot.util.Status;
+
+import fresher_presentation_app_springboot.exceptions.PresentationIdNotFoundException;
+import fresher_presentation_app_springboot.exceptions.StudentIdNotFoundException;
 	
 	@Service
 	public class PresentationService {
@@ -56,11 +59,14 @@ import com.ty.fresher_presentation_app_springboot.util.Status;
 						
 						return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.CREATED);
 					}else {
-						ResponseStucture<Presentation> responseStucture=new ResponseStucture<>();
-						responseStucture.setStatusCode(404);
-						responseStucture.setMessage("Student Id Not Found");
-						responseStucture.setData(null);
-						return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.NOT_FOUND);
+						
+						throw new StudentIdNotFoundException("ID: "+id+" ,not present in DB");
+						
+//						ResponseStucture<Presentation> responseStucture=new ResponseStucture<>();
+//						responseStucture.setStatusCode(404);
+//						responseStucture.setMessage("Student Id Not Found");
+//						responseStucture.setData(null);
+//						return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.NOT_FOUND);
 					}
 		}
 		
@@ -94,11 +100,58 @@ import com.ty.fresher_presentation_app_springboot.util.Status;
 	
 			}
 			else {
+				
+				throw new PresentationIdNotFoundException("ID: "+id+" ,not present in DB");
+				
+//				ResponseStucture<Presentation> responseStucture=new ResponseStucture<>();
+//				responseStucture.setStatusCode(404);
+//				responseStucture.setMessage("ID Not Found");
+//				responseStucture.setData(null);
+//				return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.NOT_FOUND);
+			}
+		}
+		
+		public ResponseEntity<ResponseStucture<Presentation>> findPresentationById(int id)
+		{ 
+			Optional<Presentation> presentation = presentationRepository.findById(id);
+			Presentation presentation1 =presentation.get();
+			if(presentation.isPresent()) {
 				ResponseStucture<Presentation> responseStucture=new ResponseStucture<>();
-				responseStucture.setStatusCode(404);
-				responseStucture.setMessage("ID Not Found");
-				responseStucture.setData(null);
-				return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.NOT_FOUND);
+				responseStucture.setStatusCode(200);
+				responseStucture.setMessage("Presentation Found");
+				responseStucture.setData(presentation1);
+				return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.OK);
+			}else {
+				
+				throw new PresentationIdNotFoundException("ID: "+id+" ,not present in DB");
+				
+//				ResponseStucture<Presentation> responseStucture=new ResponseStucture<>();
+//				responseStucture.setStatusCode(404);
+//				responseStucture.setMessage("ID Not Found");
+//				responseStucture.setData(null);
+//				return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.NOT_FOUND);
+			}
+		}
+		
+		public ResponseEntity<ResponseStucture<List<Presentation>>> findByUserId(int id)
+		{
+			List<Presentation> presentation = presentationDao.findByUserId(id);
+			
+			if(presentation.size()>0) {
+				ResponseStucture<List<Presentation>> responseStucture=new ResponseStucture<>();
+				responseStucture.setStatusCode(200);
+				responseStucture.setMessage("Presentation Found");
+				responseStucture.setData(presentation);
+				return new ResponseEntity<ResponseStucture<List<Presentation>>>(responseStucture,HttpStatus.OK);
+			}else {
+				
+				throw new StudentIdNotFoundException("ID: "+id+" ,not present in DB");
+				
+//				ResponseStucture<List<Presentation>> responseStucture=new ResponseStucture<>();
+//				responseStucture.setStatusCode(404);
+//				responseStucture.setMessage("ID Not Found");
+//				responseStucture.setData(null);
+//				return new ResponseEntity<ResponseStucture<List<Presentation>>>(responseStucture,HttpStatus.NOT_FOUND);
 			}
 		}
 		

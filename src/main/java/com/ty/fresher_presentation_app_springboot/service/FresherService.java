@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import com.ty.fresher_presentation_app_springboot.dao.FresherDao;
 import com.ty.fresher_presentation_app_springboot.dto.ResponseStucture;
 import com.ty.fresher_presentation_app_springboot.entity.Fresher;
+import com.ty.fresher_presentation_app_springboot.entity.Presentation;
+import com.ty.fresher_presentation_app_springboot.entity.Review;
 import com.ty.fresher_presentation_app_springboot.repository.FresherRepository;
 import com.ty.fresher_presentation_app_springboot.util.Role;
 import com.ty.fresher_presentation_app_springboot.util.Status;
@@ -133,7 +135,61 @@ public class FresherService {
 		}
 	}
 	
-	
+	public ResponseEntity<ResponseStucture<Fresher>> calculateAverageScoreOfUser(int id)
+	{
+		Optional<Fresher> fresher = fresherRepository.findById(id);
+		Fresher fresher1 =fresher.get();
+		
+		if(fresher1.getStatus()==Status.ACTIVE)
+		{
+		
+		List<Presentation> presentations=fresher1.getPresentation();
+		
+		if(presentations.size()!=0)
+		{  
+			
+			double tscore=0;
+			for(int i=0;i<presentations.size();i++)
+			{
+			
+				Presentation presentation=presentations.get(i);
+				tscore = tscore+presentation.getTotalScore();
+				
+			}
+			double avgscore=tscore/presentations.size();
+			fresher1.setUserTotalScore(avgscore);
+			
+			Fresher recievedFresher=fresherDao.saveFresher(fresher1);
+		
+			
+			ResponseStucture<Fresher> responseStucture=new ResponseStucture<>();
+			responseStucture.setStatusCode(200);
+			responseStucture.setMessage("success");
+			responseStucture.setData(recievedFresher);
+			
+			return new ResponseEntity<ResponseStucture<Fresher>>(responseStucture,HttpStatus.OK);
+			
+			
+		}
+		else
+		{
+			ResponseStucture<Fresher> responseStucture=new ResponseStucture<>();
+			responseStucture.setStatusCode(404);
+			responseStucture.setMessage("No Review Given Yet");
+			responseStucture.setData(null);
+			return new ResponseEntity<ResponseStucture<Fresher>>(responseStucture,HttpStatus.NOT_FOUND);
+		}
+	}
+	else
+	{
+		ResponseStucture<Fresher> responseStucture=new ResponseStucture<>();
+		responseStucture.setStatusCode(404);
+		responseStucture.setMessage("Presentation Status is not Completed Yet..!");
+		responseStucture.setData(null);
+		return new ResponseEntity<ResponseStucture<Fresher>>(responseStucture,HttpStatus.NOT_FOUND);
+
+	}
+   }
 	
 	
 }

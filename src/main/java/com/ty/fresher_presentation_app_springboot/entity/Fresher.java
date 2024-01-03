@@ -24,6 +24,7 @@ public class Fresher {
 	private String password;
 	private Role role;
 	private Status status;
+	private double userTotalScore;
 	
 	@JsonIgnore
 	@OneToMany
@@ -92,6 +93,17 @@ public class Fresher {
 	public void setPresentation(List<Presentation> presentation) {
 		this.presentation = presentation;
 	}
+
+	public double getUserTotalScore() {
+		return userTotalScore;
+	}
+
+	public void setUserTotalScore(double userTotalScore) {
+		this.userTotalScore = userTotalScore;
+	}
+
+	
+	
 	
 	
 	

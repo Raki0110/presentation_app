@@ -8,18 +8,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.ty.fresher_presentation_app_springboot.dto.ResponseStucture;
 
 @ControllerAdvice
-public class ReviewExceptionController {
-
-	@ExceptionHandler(UnAuthorizedReviewException.class)
-	public ResponseEntity<ResponseStucture<String>> handleUnAuthorizedReviewException(UnAuthorizedReviewException  unAuthorizedReviewException)
+public class PresentationExceptionController {
+	
+	
+	@ExceptionHandler(PresentationIdNotFoundException.class)
+	public ResponseEntity<ResponseStucture<String>> handlePresentationIdNotFoundException(PresentationIdNotFoundException  presentationIdNotFoundException)
 	{
 		ResponseStucture<String> structure=new ResponseStucture<>();
 		structure.setStatusCode(HttpStatus.BAD_REQUEST.value());
-		structure.setMessage("message: "+unAuthorizedReviewException.getMessage());
-	    structure.setData("Student Cannot Review Himself");
+		structure.setMessage("message: "+presentationIdNotFoundException.getMessage());
+	    structure.setData("No Presentation id is found");
 	    
 	    return new ResponseEntity<ResponseStucture<String>>(structure,HttpStatus.NOT_FOUND);
-	}
-	
 	    
+	}
+
 }
