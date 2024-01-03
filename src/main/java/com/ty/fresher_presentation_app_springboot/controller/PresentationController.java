@@ -34,6 +34,7 @@ public class PresentationController {
 		return presentationService.updatePresentation(id);
 	}
 	
+
 	@GetMapping("/findpresentationbyid")
 	
 	public ResponseEntity<ResponseStucture<Presentation>> findPresentationById(@PathVariable int id)
@@ -49,5 +50,11 @@ public class PresentationController {
 	}
 
 	
+
+	@GetMapping("/presentationscore/{id}")
+	public ResponseEntity<ResponseStucture<Presentation>> calculatePresentation(@PathVariable int id)
+	{
+		return presentationService.calculatePresentation(id);
+	}
 
 }

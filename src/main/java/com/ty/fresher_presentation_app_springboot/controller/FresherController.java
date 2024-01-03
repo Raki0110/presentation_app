@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ty.fresher_presentation_app_springboot.dto.ResponseStucture;
 import com.ty.fresher_presentation_app_springboot.entity.Fresher;
+import com.ty.fresher_presentation_app_springboot.entity.Presentation;
 import com.ty.fresher_presentation_app_springboot.service.FresherService;
 
 @RestController
@@ -47,6 +48,13 @@ public class FresherController {
 		
 		return fresherService.findByName(name);
 	}
+	
+	@GetMapping("/calculateAverageScoreOfUser/{id}")
+	public ResponseEntity<ResponseStucture<Fresher>> calculatePresentation(@PathVariable int id)
+	{
+		return fresherService.calculateAverageScoreOfUser(id);
+	}
+
 	
 	
 	

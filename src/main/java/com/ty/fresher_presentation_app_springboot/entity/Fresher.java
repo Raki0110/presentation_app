@@ -2,6 +2,7 @@ package com.ty.fresher_presentation_app_springboot.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ty.fresher_presentation_app_springboot.util.Role;
 import com.ty.fresher_presentation_app_springboot.util.Status;
 
@@ -23,7 +24,9 @@ public class Fresher {
 	private String password;
 	private Role role;
 	private Status status;
+	private double userTotalScore;
 	
+	@JsonIgnore
 	@OneToMany
 	private List<Presentation> presentation;
 
@@ -90,6 +93,17 @@ public class Fresher {
 	public void setPresentation(List<Presentation> presentation) {
 		this.presentation = presentation;
 	}
+
+	public double getUserTotalScore() {
+		return userTotalScore;
+	}
+
+	public void setUserTotalScore(double userTotalScore) {
+		this.userTotalScore = userTotalScore;
+	}
+
+	
+	
 	
 	
 	

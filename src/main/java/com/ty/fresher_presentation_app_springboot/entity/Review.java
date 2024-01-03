@@ -1,6 +1,8 @@
 
  package com.ty.fresher_presentation_app_springboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +23,7 @@ public class Review {
 	private int liveliness;
 	private int energy;
 	
+	@JsonIgnore
 	@OneToOne
 	private Fresher voter;
 
