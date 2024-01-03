@@ -17,7 +17,19 @@ public class StudentExceptionController {
 		ResponseStucture<String> structure=new ResponseStucture<>();
 		structure.setStatusCode(HttpStatus.BAD_REQUEST.value());
 		structure.setMessage("message: "+studentIdNotFoundException.getMessage());
-	    structure.setData("no student id is found");
+	    structure.setData("No student id is found");
+	    
+	    return new ResponseEntity<ResponseStucture<String>>(structure,HttpStatus.NOT_FOUND);
+	    
+	}
+	
+	@ExceptionHandler(StudentNameNotFoundException.class)
+	public ResponseEntity<ResponseStucture<String>> handleStudentNameNotFoundException(StudentNameNotFoundException  studentNameNotFoundException)
+	{
+		ResponseStucture<String> structure=new ResponseStucture<>();
+		structure.setStatusCode(HttpStatus.BAD_REQUEST.value());
+		structure.setMessage("message: "+studentNameNotFoundException.getMessage());
+	    structure.setData("No student Name is found");
 	    
 	    return new ResponseEntity<ResponseStucture<String>>(structure,HttpStatus.NOT_FOUND);
 	    
