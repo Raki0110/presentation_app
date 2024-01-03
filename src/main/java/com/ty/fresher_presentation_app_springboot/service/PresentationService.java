@@ -13,7 +13,8 @@
 	import com.ty.fresher_presentation_app_springboot.dto.ResponseStucture;
 	import com.ty.fresher_presentation_app_springboot.entity.Fresher;
 	import com.ty.fresher_presentation_app_springboot.entity.Presentation;
-	import com.ty.fresher_presentation_app_springboot.repository.FresherRepository;
+import com.ty.fresher_presentation_app_springboot.entity.Review;
+import com.ty.fresher_presentation_app_springboot.repository.FresherRepository;
 import com.ty.fresher_presentation_app_springboot.repository.PresentationRepository;
 import com.ty.fresher_presentation_app_springboot.util.Status;
 	
@@ -100,4 +101,63 @@ import com.ty.fresher_presentation_app_springboot.util.Status;
 				return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.NOT_FOUND);
 			}
 		}
+		
+		public ResponseEntity<ResponseStucture<Presentation>> calculatePresentation(int id)
+		{
+			Optional<Presentation> presentation = presentationRepository.findById(id);
+			Presentation prstn =presentation.get();
+			
+			if(prstn.getStatus()==Status.COMPLETED)
+			{
+			
+			List<Review> reviews=prstn.getReviews();
+			
+			if(reviews.size()!=0)
+			{  
+				
+				int tscore=0;
+				for(int i=0;i<reviews.size();i++)
+				{
+					int score=0;
+					Review rvw=reviews.get(i);
+					score=(Integer)rvw.getConfidence()+(Integer)rvw.getCommunication()+(Integer)rvw.getInteraction()
+					       +(Integer)rvw.getEyeContact()+(Integer)rvw.getContent()+(Integer)rvw.getLiveliness()+(Integer)rvw.getEnergy();
+					tscore=tscore+score;
+					
+				}
+				int avgscore=tscore/reviews.size();
+				prstn.setTotalScore(avgscore);
+				
+				Presentation recievedPresentation=presentationDao.savePresentation(prstn);
+			
+				
+				ResponseStucture<Presentation> responseStucture=new ResponseStucture<>();
+				responseStucture.setStatusCode(200);
+				responseStucture.setMessage("success");
+				responseStucture.setData(recievedPresentation);
+				
+				return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.OK);
+				
+				
+			}
+			else
+			{
+				ResponseStucture<Presentation> responseStucture=new ResponseStucture<>();
+				responseStucture.setStatusCode(404);
+				responseStucture.setMessage("No Review Given Yet");
+				responseStucture.setData(null);
+				return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.NOT_FOUND);
+			}
+		}
+		else
+		{
+			ResponseStucture<Presentation> responseStucture=new ResponseStucture<>();
+			responseStucture.setStatusCode(404);
+			responseStucture.setMessage("Presentation Status is not Completed Yet..!");
+			responseStucture.setData(null);
+			return new ResponseEntity<ResponseStucture<Presentation>>(responseStucture,HttpStatus.NOT_FOUND);
+	
+		}
+	   }
+		
 	}
